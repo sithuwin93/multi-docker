@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t nca93/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mggyi/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true nca93/react-test npm run test
+  - docker run -e CI=true mggyi/react-test npm run test
   
 after_success:
-  - docker build -t nca93/multi-client ./client
-  - docker build -t nca93/multi-nginx ./nginx
-  - docker build -t nca93/multi-server ./server
-  - docker build -t nca93/multi-worker ./worker
+  - docker build -t mggyi/multi-client ./client
+  - docker build -t mggyi/multi-nginx ./nginx
+  - docker build -t mggyi/multi-server ./server
+  - docker build -t mggyi/multi-worker ./worker
   # Login to the docker ClI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images to docker hub
-  - docker push nca93/multi-client
-  - docker push nca93/multi-nginx
-  - docker push nca93/multi-server
-  - docker push nca93/multi-worker
+  - docker push mggyi/multi-client
+  - docker push mggyi/multi-nginx
+  - docker push mggyi/multi-server
+  - docker push mggyi/multi-worker
